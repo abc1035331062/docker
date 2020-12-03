@@ -1,0 +1,204 @@
+1：创建挂载目录
+  mkdir /mnt/cdrom --创建文件夹
+
+2：挂载
+mount /dev/sr0 /mnt/cdrom
+
+3. 将VMware-tools压缩包复制至/opt/，并解压
+cp /mnt/cdrom/VMwareTools-10.2.0-7259539.tar.gz /opt/
+tar -zxvf VMwareTools-10.2.0-7259539.tar.gz
+
+4. 切换到VMwareTools目录，执行VMware-tools安装命令
+cd VmwareTools-10.2.0-7259539
+./vmware-install.pl
+
+这里如果没有编译环境会报错（bash: ./vmware-install.pl: /usr/bin/perl: bad interpreter: ......）。
+
+则需要安装  yum install perl gcc kernel-devel  安装后。在运行安装文件./vmware-install.pl
+
+有[yes] 直接输入yes, 没有的直接回车。只到出现了一个重复的问题。以下是安装日志。
+
+open-vm-tools packages are available from the OS vendor and VMware recommends 
+using open-vm-tools packages. See http://kb.vmware.com/kb/2073803 for more 
+information.
+Do you still want to proceed with this installation? [yes] yes
+
+A previous installation of VMware Tools has been detected.
+
+The previous installation was made by the tar installer (version 4).
+
+Keeping the tar4 installer database format.
+
+You have a version of VMware Tools installed. Continuing this install will 
+first uninstall the currently installed version. Do you wish to continue? 
+(yes/no) [yes] yes
+
+Uninstalling the tar installation of VMware Tools.
+
+ValueError: 未定义 /sbin/vmtoolsd 的文件上下文
+semanageFcontext: unable to set SELinux fcontext - command: "semanage fcontext 
+-d /sbin/vmtoolsd"
+There was an error removing the local SELinux security context for VMware 
+Tools. Please make certain SELinux is set up correctly.
+
+Stopping services for VMware Tools
+
+ 
+
+This program previously created the file 
+/lib/vmware-tools/lib64/libconf/etc/gtk-2.0/gdk-pixbuf.loaders, and was about 
+to remove it. Somebody else apparently did it already.
+
+This program previously created the file 
+/lib/vmware-tools/lib64/libconf/etc/gtk-2.0/gtk.immodules, and was about to 
+remove it. Somebody else apparently did it already.
+
+The removal of VMware Tools 10.1.6 build-5214329 for Linux completed 
+successfully.
+
+Installing VMware Tools.
+
+In which directory do you want to install the binary files? 
+[/vm-tools]
+
+The path "/vm-tools" does not exist currently. This program is going to create 
+it, including needed parent directories. Is this what you want? [yes]
+
+What is the directory that contains the init directories (rc0.d/ to rc6.d/)? 
+[/etc/rc.d]
+
+What is the directory that contains the init scripts? 
+[/etc/rc.d/init.d]
+
+In which directory do you want to install the daemon files? 
+[/sbin]
+
+In which directory do you want to install the library files? 
+[/lib/vmware-tools]
+
+The path "/lib/vmware-tools" does not exist currently. This program is going to
+create it, including needed parent directories. Is this what you want? 
+[yes] yes
+
+In which directory do you want to install the common agent library files? 
+[/lib]
+
+In which directory do you want to install the common agent transient files? 
+[/var/lib]
+
+In which directory do you want to install the documentation files? 
+[/doc/vmware-tools]
+
+The path "/doc/vmware-tools" does not exist currently. This program is going to
+create it, including needed parent directories. Is this what you want? 
+[yes] yes
+
+The installation of VMware Tools 10.1.6 build-5214329 for Linux completed 
+successfully. You can decide to remove this software from your system at any 
+time by invoking the following command: "/vm-tools/vmware-uninstall-tools.pl".
+
+Before running VMware Tools for the first time, you need to configure it by 
+invoking the following command: "/vm-tools/vmware-config-tools.pl". Do you want
+this program to invoke the command for you now? [yes] yes
+
+Initializing...
+
+
+Making sure services for VMware Tools are stopped.
+
+ 
+
+The module vmci has already been installed on this system by another installer 
+or package and will not be modified by this installer.
+
+The module vsock has already been installed on this system by another installer
+or package and will not be modified by this installer.
+
+The module vmxnet3 has already been installed on this system by another 
+installer or package and will not be modified by this installer.
+
+The module pvscsi has already been installed on this system by another 
+installer or package and will not be modified by this installer.
+
+The module vmmemctl has already been installed on this system by another 
+installer or package and will not be modified by this installer.
+
+The VMware Host-Guest Filesystem allows for shared folders between the host OS 
+and the guest OS in a Fusion or Workstation virtual environment. Do you wish 
+to enable this feature? [yes] yes
+
+
+Before you can compile modules, you need to have the following installed...
+
+make
+gcc
+kernel headers of the running kernel
+
+
+Searching for GCC...
+Detected GCC binary at "/bin/gcc".
+The path "/bin/gcc" appears to be a valid path to the gcc binary.
+Would you like to change it? [no] no
+
+Searching for a valid kernel header path... --这里要输入刚刚安装的repl 的include
+The path "" is not a valid path to the 3.10.0-957.el7.x86_64 kernel headers.
+Would you like to change it? [yes] yes
+
+Enter the path to the kernel header files for the 3.10.0-957.el7.x86_64 
+kernel?
+
+The path "" is not a valid path to the 3.10.0-957.el7.x86_64 kernel headers.
+Would you like to change it? [yes] yes
+
+Enter the path to the kernel header files for the 3.10.0-957.el7.x86_64 
+kernel? ""
+
+Enter the path to the kernel header files for the 3.10.0-957.el7.x86_64 
+kernel? /usr/src/kernels/3.10.0-957.5.1.el7.x86_64/include （自己需要替换）
+
+The path "/usr/src/kernels/3.10.0-957.5.1.el7.x86_64/include" is not a valid 
+path to the 3.10.0-957.el7.x86_64 kernel headers.
+
+
+Would you like to change it? [yes] no
+
+WARNING: This program cannot compile any modules for the following reason(s)...
+
+- This program could not find a valid path to the kernel headers of the running
+kernel. Please ensure that the header files for the running kernel are 
+installed on this sytem.
+
+[ Press Enter key to continue ]
+
+
+The filesystem driver (vmhgfs module) is used only for the shared folder 
+feature. The rest of the software provided by VMware Tools is designed to work 
+independently of this feature.
+
+If you wish to have the shared folders feature, you can install the driver by 
+running vmware-config-tools.pl again after making sure that gcc, binutils, make
+and the kernel sources for your running kernel are installed on your machine. 
+These packages are available on your distribution‘s installation CD.
+[ Press Enter key to continue ] ...... 
+
+后面yes 回车，输入即可，只到。
+
+
+5. 安装完成后，执行df -h，显示如下信息表示安装成功
+df -h
+vmhgfs-fuse 197G 95G 103G 49% /mnt/hgfs
+ 
+6. 若重启后，发现共享文件夹不显示，则检查vmware-tools服务是否没有启动，执行以下命令启动服务
+service vmware-tools start
+或者执行如下命令手工挂载
+# 若vmhgfs-fuse -e执行成功时执行
+
+挂载，-o参数比较重要，不然其他用户没权限读写
+vmhgfs-fuse .host:/  /root/nginx/www/hgfs/  -o subtype=vmhgfs-fuse,allow_other
+
+# mvhgfs-fuse -e 执行失败时执行
+mount -f vmhgfs .host:/ /mnt/hgfs
+
+
+
+
